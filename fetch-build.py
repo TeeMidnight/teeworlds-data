@@ -97,7 +97,7 @@ def BuildWeb():
     writebuffer("</details>")
 
     writebuffer("<details>")
-    writebuffer("<summary><h1>TaterClient(Windows)下载(给予源github链接)</h1></summary>")
+    writebuffer("<summary><h3>TaterClient(Windows)下载(给予源github链接)</h3></summary>")
 
     for i in FindReleases("v", github.get_repo("sjrc6/TaterClient-ddnet")):
         writebuffer(f"##TaterClient{i.title}")
