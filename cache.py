@@ -11,11 +11,13 @@ def FastDownloadFile(url, save_path):
 
     file = open(save_path, "wb")
     count = 1
-    for i in response.iter_content(chunk_size=1024):
+    for i in response.iter_content(chunk_size=2048):
         file.write(i)
-        print(f"下载中..{round(count * 1024 / float(size) * 100, 2)}%", end="\r")
+        if count != 1:
+            print("\r", end="")
+        print(f"下载中..{round(count * 2048 / float(size) * 100, 2)}%", end="")
         count += 1
-    print(f"下载完成", end="\r")
+    print("\r下载完成")
     new_files.append(save_path)
 
 def FetchDDNet():
