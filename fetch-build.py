@@ -88,7 +88,7 @@ def BuildWeb():
     writebuffer("<details>")
     writebuffer("<summary><h3>DDNet(Andorid)下载</h3></summary>")
 
-    for i in FindReleases("DDNet"):
+    for i in FindReleases("ddnet"):
         writebuffer(f"##{i.title}")
         writebuffer("<p><a href=\"https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk\">github源链(能使用这个就用这个)</a></p>".format(i.tag_name, i.title))
         writebuffer("\n")
@@ -99,7 +99,7 @@ def BuildWeb():
     writebuffer("<details>")
     writebuffer("<summary><h3>TaterClient(Windows)下载(给予源github链接)</h3></summary>")
 
-    for i in FindReleases("v", github.get_repo("sjrc6/TaterClient-ddnet")):
+    for i in FindReleases("V", github.get_repo("sjrc6/TaterClient-ddnet")):
         writebuffer(f"##TaterClient{i.title}")
         writebuffer("<p><a href=\"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe\">github源链(能使用这个就用这个)</a></p>".format(i.tag_name))
         writebuffer("\n")
