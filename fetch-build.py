@@ -83,16 +83,16 @@ def BuildWeb():
     writebuffer("<title>Teeworlds资源站</title>")
     writebuffer("</head>")
     writebuffer("<body>")
-    writebuffer("<a>本项目由Mid·Night组织提供!</a>")
+    writebuffer("<p>本项目由Mid·Night组织提供!</p>")
 
     writebuffer("<details>")
-    writebuffer("<summary><h1>DDNet(Andorid)下载</h1></summary>")
+    writebuffer("<summary><h3>DDNet(Andorid)下载</h3></summary>")
 
     for i in FindReleases("DDNet"):
         writebuffer(f"##{i.title}")
-        writebuffer("[github源链(能使用这个就用这个)](https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk)".format(i.tag_name, i.title))
+        writebuffer("<p><a href=\"https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk\">github源链(能使用这个就用这个)</a></p>".format(i.tag_name, i.title))
         writebuffer("\n")
-        writebuffer("[github镜像站链](https://github.moeyy.xyz/https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk)".format(i.tag_name, i.title))
+        writebuffer("<p><a href=\"https://github.moeyy.xyz/https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk\">github镜像站链</a></p>".format(i.tag_name, i.title))
 
     writebuffer("</details>")
 
@@ -101,9 +101,9 @@ def BuildWeb():
 
     for i in FindReleases("v", github.get_repo("sjrc6/TaterClient-ddnet")):
         writebuffer(f"##TaterClient{i.title}")
-        writebuffer("[github源链(能使用这个就用这个)](https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe)".format(i.tag_name))
+        writebuffer("<p><a href=\"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe\">github源链(能使用这个就用这个)</a></p>".format(i.tag_name))
         writebuffer("\n")
-        writebuffer("[github镜像站链](https://github.moeyy.xyz/https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe)".format(i.tag_name))
+        writebuffer("<p><a href=\"https://github.moeyy.xyz/https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe\">github镜像站链</a></p>".format(i.tag_name))
     writebuffer("</details>")
     writebuffer("</body>")
     writebuffer("</html>")
