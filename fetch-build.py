@@ -71,12 +71,19 @@ def FetchDDNet():
 
 def BuildWeb():
     CreateDirIfNotExists("web-build")
-    file = open("web-build/README.md", "w")
+    file = open("web-build/index.html", "w")
     def writebuffer(line):
         print(line, file=file)
-    writebuffer("teeworlds-data")
-    writebuffer("==============")
-    writebuffer("本项目由Mid·Night组织提供!")
+
+    writebuffer("<!DOCTYPE html>")
+    writebuffer("<html>")
+    writebuffer("<head>")
+    writebuffer("<meta charset=\"utf-8\">")
+    writebuffer("<link rel=\"shortcut icon\" href=\"https://avatars.githubusercontent.com/u/101462745?s=32\">")
+    writebuffer("<title>Teeworlds资源站</title>")
+    writebuffer("</head>")
+    writebuffer("<body>")
+    writebuffer("<a>本项目由Mid·Night组织提供!</a>")
 
     writebuffer("<details>")
     writebuffer("<summary><h1>DDNet(Andorid)下载</h1></summary>")
@@ -98,6 +105,8 @@ def BuildWeb():
         writebuffer("\n")
         writebuffer("[github镜像站链](https://github.moeyy.xyz/https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe)".format(i.tag_name))
     writebuffer("</details>")
+    writebuffer("</body>")
+    writebuffer("</html>")
 
     file.close()
 
