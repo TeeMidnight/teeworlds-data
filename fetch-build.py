@@ -1,6 +1,26 @@
 import requests, json, sys, os
 
-new_files = []
+from github import Github
+from github import Auth
+from github import GitRelease
+
+auth = Auth.Token(os.environ.get("GITHUB_TOKEN"))
+github = Github(auth=auth)
+repo = github.get_repo("TeeMidNight/teeworlds-data")
+branch = repo.get_branch("main")
+
+def FindRelease(tag_name) -> GitRelease.GitRelease | None:
+    releases = repo.get_releases()
+
+    matched_releases = [release for release in releases if release.tag_name == tag_name]
+
+    if matched_releases:
+        return matched_releases[0]
+    return None
+
+def ReleaseFile(tag_name, ):
+    github.update_release()
+
 def CreateDirIfNotExists(dirpath):
     if os.path.exists(dirpath) == False:
         os.mkdir(dirpath)
@@ -18,7 +38,6 @@ def FastDownloadFile(url, save_path):
         print(f"下载中..{round(count * 2048 / float(size) * 100, 2)}%", end="")
         count += 1
     print("\r下载完成")
-    new_files.append(save_path)
 
 def FetchDDNet():
     try:
@@ -27,11 +46,13 @@ def FetchDDNet():
         update_json = json.loads(update.content) #获取版本号
         
         Version = str(update_json[0]["version"])
-        FileCheckName = f"cache/DDNet/DDNet-{Version}.apk"
-        if os.path.exists(FileCheckName) == False:
+        if FindRelease(f"DDNet-{Version}") == False:
+            FileName = f"cache/DDNet/DDNet-{Version}.apk"
             print(f"正在拉取DDNet-Android-{Version}")
             CreateDirIfNotExists("cache/DDNet")
-            FastDownloadFile(f"https://ddnet.org/downloads/DDNet-{Version}.apk", FileCheckName)
+            FastDownloadFile(f"https://ddnet.org/downloads/DDNet-{Version}.apk", FileName)
+            release = repo.create_git_release(f"ddnet-{Version}", f"DDNet-{Version}", "自动上传")
+            release.upload_asset(FileName)
 
         print("DDNet已更新到最新!")
     except:
@@ -45,15 +66,8 @@ def FetchTaterClient():
         
         TagName = str(update_json["tag_name"]);
         Version = str(update_json["name"])
-        FileCheckName = f"cache/TaterClient/TaterClient-{Version}.zip"
-        if os.path.exists(FileCheckName) == False:
-            print(f"正在拉取TaterClient-{Version}")
-            CreateDirIfNotExists("cache/TaterClient")
-            FastDownloadFile(f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{TagName}/TClient-windows.zip", f"cache/TaterClient/TaterClient-{Version}.zip")
-
-        print("TaterClient已更新到最新!")
     except:
-        print("拉取TaterClient部分失败!")
+        print("搜索TaterClient失败!")
 
 def main():
     CreateDirIfNotExists("cache")
