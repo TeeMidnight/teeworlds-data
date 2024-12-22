@@ -4,7 +4,8 @@ from github import Github
 from github import Auth
 from github import GitRelease
 
-auth = Auth.Token(os.environ.get("GITHUB_TOKEN"))
+token = str(os.environ.get("GITHUB_TOKEN"))
+auth = Auth.Token(token)
 github = Github(auth=auth)
 repo = github.get_repo("TeeMidNight/teeworlds-data")
 branch = repo.get_branch("main")
