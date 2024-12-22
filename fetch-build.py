@@ -47,7 +47,7 @@ def FetchDDNet():
         update_json = json.loads(update.content) #获取版本号
         
         Version = str(update_json[0]["version"])
-        if FindRelease(f"DDNet-{Version}") == False:
+        if FindRelease(f"DDNet-{Version}") == None:
             FileName = f"cache/DDNet/DDNet-{Version}.apk"
             print(f"正在拉取DDNet-Android-{Version}")
             CreateDirIfNotExists("cache/DDNet")
