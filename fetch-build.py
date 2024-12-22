@@ -109,6 +109,9 @@ def BuildWeb():
     writebuffer("</html>")
 
     file.close()
+    file = open("web-build/CNAME", "w")
+    writebuffer("data.teemidnight.online")
+    file.close()
 
 def main():
     CreateDirIfNotExists("cache")
