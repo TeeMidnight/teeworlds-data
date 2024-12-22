@@ -41,12 +41,13 @@ def FetchTaterClient():
         update = requests.get(url, allow_redirects=True)
         update_json = json.loads(update.content) #获取版本号
         
+        TagName = str(update_json["tag_name"]);
         Version = str(update_json["name"])
         FileCheckName = f"cache/TaterClient/TaterClient-{Version}.zip"
         if os.path.exists(FileCheckName) == False:
             print(f"正在拉取TaterClient-{Version}")
             CreateDirIfNotExists("cache/TaterClient")
-            FastDownloadFile(f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{update_json["tag_name"]}/TClient-windows.zip", f"cache/TaterClient/TaterClient-{Version}.zip")
+            FastDownloadFile(f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{TagName}/TClient-windows.zip", f"cache/TaterClient/TaterClient-{Version}.zip")
 
         print("TaterClient已更新到最新!")
     except:
