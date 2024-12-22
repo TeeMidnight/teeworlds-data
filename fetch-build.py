@@ -86,7 +86,7 @@ def BuildWeb():
     writebuffer("<p>本项目由Mid·Night组织提供!</p>")
 
     writebuffer("<details>")
-    writebuffer("<summary><h3>DDNet(Andorid)下载</h3></summary>")
+    writebuffer("<summary>DDNet(Andorid)下载</summary>")
 
     for i in FindReleases("ddnet"):
         writebuffer(f"##{i.title}")
@@ -97,7 +97,7 @@ def BuildWeb():
     writebuffer("</details>")
 
     writebuffer("<details>")
-    writebuffer("<summary><h3>TaterClient(Windows)下载(给予源github链接)</h3></summary>")
+    writebuffer("<summary>TaterClient(Windows)下载(给予源github链接)</summary>")
 
     for i in FindReleases("V", github.get_repo("sjrc6/TaterClient-ddnet")):
         writebuffer(f"##TaterClient{i.title}")
