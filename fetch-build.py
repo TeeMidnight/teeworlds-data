@@ -77,15 +77,15 @@ def BuildWeb():
 
     # generate json
     json_dump = [{"name" : "DDNet", "items": []}, {"name": "TaterClient", "items": []}]
-    for i in FindReleases("ddnet"):
-        item = {"title": f"DDNet{i.title} (Android)", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{i.title}.apk"}
+    for i in FindReleases("ddnet", repo):
+        item = {"title": f"{i.title} (Android)", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{i.title}.apk"}
         json_dump[0]["items"].append(item)
 
     for i in FindReleases("V", github.get_repo("sjrc6/TaterClient-ddnet")):
         item = {"title": f"TaterClient{i.title} (Windows)", "source": f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{i.tag_name}/DDNet.exe"}
-        json_dump[0]["items"].append(item)
+        json_dump[1]["items"].append(item)
 
-    buffer.format(json.dumps(json_dump))
+    buffer = buffer.format(json.dumps(json_dump, ensure_ascii=False))
 
     file = open("web-build/index.html", "w")
     file.write(buffer)

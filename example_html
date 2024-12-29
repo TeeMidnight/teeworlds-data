@@ -225,33 +225,7 @@
      {{ label: "GitHub 镜像站 1", prefix: "https://github.moeyy.xyz/", name: "Mirror1"}},
      {{ label: "GitHub 镜像站 2", prefix: "https://ghproxy.com/", name: "Mirror2"}}
     ];
-    const data = {}
-     {{
-        name: "DDNet",
-        items: [
-         {{
-            title: "DDNet 下载",
-            description: "DDNet-18.8.2",
-            source: "https://github.com/ddnet/ddnet/releases/download/18.8.2/DDNet-18.8.2-android.apk"
-         }}
-        ]
-     }},
-     {{
-        name: "TaterClient",
-        items: [
-         {{
-            title: "TaterClient (Windows) 下载",
-            description: "TaterClient 9.0.2",
-            source: "https://github.com/sjrc6/TaterClient-ddnet/releases/download/9.0.2/TaterClient-9.0.2-win32.zip"
-         }},
-         {{
-            title: "其他版本的 TaterClient 下载",
-            description: "TaterClient 9.0.1",
-            source: "https://github.com/sjrc6/TaterClient-ddnet/releases/download/9.0.1/TaterClient-9.0.1-win32.zip"
-         }}
-        ]
-     }}
-    ];
+    const data = {0};
     const content = document.getElementById('content');
     data.forEach(categoryObj =>{{
       const categoryBlock = document.createElement('div');
@@ -260,7 +234,7 @@
       categoryHeader.className = 'category-header';
       categoryHeader.innerHTML = `
         <span class="arrow">▶</span>
-        <span>${categoryObj.name}</span>
+        <span>${{categoryObj.name}}</span>
         <div class="ripple-container"></div>
       `;
       categoryHeader.addEventListener('click', () =>{{
