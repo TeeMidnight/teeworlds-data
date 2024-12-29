@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teeworlds 资源站</title>
+  <style>
+    :root{{
+      --color-primary: #6750A4;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #7D5260;
+      --color-on-secondary: #FFFFFF;
+      --color-surface: #F5EFFB;
+      --color-on-surface: #1C1B1F;
+      --color-outline: #CBC6D6;
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
+   }}
+    *, *::before, *::after{{
+      box-sizing: border-box;
+   }}
+    html, body{{
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+   }}
+    body{{
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-surface);
+      color: var(--color-on-surface);
+      font-family: 'Roboto', sans-serif;
+   }}
+    h1, h2, h3{{
+      margin: 0;
+      padding: 0;
+   }}
+    a{{
+      text-decoration: none;
+      color: inherit;
+   }}
+    .container{{
+      max-width: 960px;
+      margin: 0 auto;
+      width: 100%;
+   }}
+    header{{
+      width: 100%;
+      background-color: var(--color-primary);
+      color: var(--color-on-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+   }}
+    header .container{{
+      padding: 1rem 1.5rem;
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }}
+    header h1{{
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+   }}
+    header p{{
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin: 0;
+   }}
+    main{{
+      flex: 1;
+      width: 100%;
+   }}
+    main .container{{
+      padding: 1.5rem 1rem 2rem;
+   }}
+    .category-block{{
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--color-outline);
+      border-radius: var(--border-radius);
+      background-color: #FFF;
+      overflow: hidden;
+      transition: box-shadow var(--transition-speed) ease;
+   }}
+    .category-header{{
+      position: relative;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      overflow: hidden;
+   }}
+    .category-header:hover{{
+      background-color: rgba(103,80,164,0.08);
+   }}
+    .ripple-container{{
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      pointer-events: none;
+   }}
+    .arrow{{
+      font-size: 1rem;
+      margin-right: 0.75rem;
+      transition: transform 0.2s ease;
+      opacity: 0.8;
+   }}
+    .category-content{{
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-speed) ease;
+   }}
+    .category-block.expanded .category-content{{
+      max-height: 1000px;
+   }}
+    .category-block.expanded .arrow{{
+      transform: rotate(90deg);
+   }}
+    .card{{
+      background: #FFFFFF;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem 1.2rem;
+      margin: 0.8rem;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+   }}
+    .card:hover{{
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+   }}
+    .card h2{{
+      font-size: 1.1rem;
+      margin: 0 0 0.2rem 0;
+      font-weight: 500;
+   }}
+    .card h3{{
+      font-size: 0.95rem;
+      margin: 0.2rem 0 1rem 0;
+      color: #666;
+      font-weight: 400;
+   }}
+    .download-links{{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+   }}
+    .download-links a{{
+      background: var(--color-secondary);
+      color: var(--color-on-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      font-size: 0.85rem;
+      font-weight: 500;
+   }}
+    .download-links a:hover{{
+      background: #6c4655;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+   }}
+    footer{{
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      text-align: center;
+      padding: 0.8rem 1.5rem;
+      border-top-left-radius: var(--border-radius);
+      border-top-right-radius: var(--border-radius);
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.15);
+   }}
+    footer .container{{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }}
+    footer span{{
+      font-size: 0.85rem;
+      opacity: 0.9;
+   }}
+    @media (max-width: 600px){{
+      header .container,
+      main .container{{
+        padding: 1rem 0.8rem;
+     }}
+      .category-header{{
+        padding: 0.8rem 1rem;
+     }}
+      .card{{
+        margin: 0.5rem auto;
+        padding: 1rem;
+        max-width: 100%;
+     }}
+      .download-links a{{
+        padding: 0.45rem 0.6rem;
+        font-size: 0.8rem;
+     }}
+   }}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Teeworlds 资源站</h1>
+      <p>本项目由 Mid·Night 组织提供!</p>
+      <p>感谢xy_cloud对本项目的支持aw!!!</p>
+    </div>
+  </header>
+  <main>
+    <div class="container" id="content"></div>
+  </main>
+  <footer>
+    <div class="container">
+      <span>© 2025 Mid·Night</span>
+    </div>
+  </footer>
+  <script>
+    const mirrors = [
+     {{ label: "GitHub 源链 (推荐)", prefix: "", name: "GitHub"}},
+     {{ label: "GitHub 镜像站 1", prefix: "https://github.moeyy.xyz/", name: "Mirror1"}},
+     {{ label: "GitHub 镜像站 2", prefix: "https://ghproxy.com/", name: "Mirror2"}}
+    ];
+    const data = {}
+     {{
+        name: "DDNet",
+        items: [
+         {{
+            title: "DDNet 下载",
+            description: "DDNet-18.8.2",
+            source: "https://github.com/ddnet/ddnet/releases/download/18.8.2/DDNet-18.8.2-android.apk"
+         }}
+        ]
+     }},
+     {{
+        name: "TaterClient",
+        items: [
+         {{
+            title: "TaterClient (Windows) 下载",
+            description: "TaterClient 9.0.2",
+            source: "https://github.com/sjrc6/TaterClient-ddnet/releases/download/9.0.2/TaterClient-9.0.2-win32.zip"
+         }},
+         {{
+            title: "其他版本的 TaterClient 下载",
+            description: "TaterClient 9.0.1",
+            source: "https://github.com/sjrc6/TaterClient-ddnet/releases/download/9.0.1/TaterClient-9.0.1-win32.zip"
+         }}
+        ]
+     }}
+    ];
+    const content = document.getElementById('content');
+    data.forEach(categoryObj =>{{
+      const categoryBlock = document.createElement('div');
+      categoryBlock.className = 'category-block';
+      const categoryHeader = document.createElement('div');
+      categoryHeader.className = 'category-header';
+      categoryHeader.innerHTML = `
+        <span class="arrow">▶</span>
+        <span>${categoryObj.name}</span>
+        <div class="ripple-container"></div>
+      `;
+      categoryHeader.addEventListener('click', () =>{{
+        categoryBlock.classList.toggle('expanded');
+     }});
+      categoryHeader.addEventListener('mousedown', (e) =>{{
+        const rippleContainer = categoryHeader.querySelector('.ripple-container');
+        const ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.backgroundColor = 'rgba(0,0,0,0.2)';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.width = ripple.style.height = '0px';
+        ripple.style.transform = 'translate(-50%, -50%)';
+        ripple.style.left = e.offsetX + 'px';
+        ripple.style.top = e.offsetY + 'px';
+        ripple.style.transition = 'width 0.4s ease, height 0.4s ease, opacity 0.6s ease';
+        rippleContainer.appendChild(ripple);
+        requestAnimationFrame(() =>{{
+          ripple.style.width = ripple.style.height = Math.max(categoryHeader.clientWidth, categoryHeader.clientHeight) * 2 + 'px';
+          ripple.style.opacity = '0';
+       }});
+        setTimeout(() =>{{
+          ripple.remove();
+       }}, 600);
+     }});
+      const categoryContent = document.createElement('div');
+      categoryContent.className = 'category-content';
+      categoryObj.items.forEach(item =>{{
+        const card = document.createElement('div');
+        card.className = 'card';
+        const title = document.createElement('h2');
+        title.textContent = item.title;
+        card.appendChild(title);
+        const linksContainer = document.createElement('div');
+        linksContainer.className = 'download-links';
+        mirrors.forEach(mirror =>{{
+          const a = document.createElement('a');
+          a.textContent = mirror.label + " - " + mirror.name;
+          a.href = mirror.prefix + item.source;
+          linksContainer.appendChild(a);
+       }});
+        card.appendChild(linksContainer);
+        categoryContent.appendChild(card);
+     }});
+      categoryBlock.appendChild(categoryHeader);
+      categoryBlock.appendChild(categoryContent);
+      content.appendChild(categoryBlock);
+   }});
+  </script>
+</body>
+</html>

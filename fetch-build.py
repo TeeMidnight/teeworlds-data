@@ -71,46 +71,27 @@ def FetchDDNet():
 
 def BuildWeb():
     CreateDirIfNotExists("web-build")
-    file = open("web-build/index.html", "w")
-    def writebuffer(line):
-        print(line, file=file)
 
-    writebuffer("<!DOCTYPE html>")
-    writebuffer("<html>")
-    writebuffer("<head>")
-    writebuffer("<meta charset=\"utf-8\">")
-    writebuffer("<link rel=\"shortcut icon\" href=\"https://avatars.githubusercontent.com/u/101462745?s=32\">")
-    writebuffer("<title>Teeworlds资源站</title>")
-    writebuffer("</head>")
-    writebuffer("<body>")
-    writebuffer("<p>本项目由Mid·Night组织提供!</p>")
+    file = open("example_html", "r")
+    buffer = file.read()
 
-    writebuffer("<details>")
-    writebuffer("<summary>DDNet(Andorid)下载</summary>")
-
+    # generate json
+    json_dump = [{"name" : "DDNet", "items": []}, {"name": "TaterClient", "items": []}]
     for i in FindReleases("ddnet"):
-        writebuffer(f"##{i.title}")
-        writebuffer("<p><a href=\"https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk\">github源链(能使用这个就用这个)</a></p>".format(i.tag_name, i.title))
-        writebuffer("\n")
-        writebuffer("<p><a href=\"https://github.moeyy.xyz/https://github.com/TeeMidnight/teeworlds-data/releases/download/{}/{}.apk\">github镜像站链</a></p>".format(i.tag_name, i.title))
-
-    writebuffer("</details>")
-
-    writebuffer("<details>")
-    writebuffer("<summary>TaterClient(Windows)下载(给予源github链接)</summary>")
+        item = {"title": f"DDNet{i.title} (Android)", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{i.title}.apk"}
+        json_dump[0]["items"].append(item)
 
     for i in FindReleases("V", github.get_repo("sjrc6/TaterClient-ddnet")):
-        writebuffer(f"##TaterClient{i.title}")
-        writebuffer("<p><a href=\"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe\">github源链(能使用这个就用这个)</a></p>".format(i.tag_name))
-        writebuffer("\n")
-        writebuffer("<p><a href=\"https://github.moeyy.xyz/https://github.com/sjrc6/TaterClient-ddnet/releases/download/{}/DDNet.exe\">github镜像站链</a></p>".format(i.tag_name))
-    writebuffer("</details>")
-    writebuffer("</body>")
-    writebuffer("</html>")
+        item = {"title": f"TaterClient{i.title} (Windows)", "source": f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{i.tag_name}/DDNet.exe"}
+        json_dump[0]["items"].append(item)
 
+    buffer.format(json.dumps(json_dump))
+
+    file = open("web-build/index.html", "w")
+    file.write(buffer)
     file.close()
     file = open("web-build/CNAME", "w")
-    writebuffer("data.teemidnight.online")
+    file.write("data.teemidnight.online")
     file.close()
 
 def main():
