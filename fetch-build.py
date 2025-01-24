@@ -66,8 +66,9 @@ def FetchDDNet():
             release.upload_asset(FileName)
 
         print("DDNet已更新到最新!")
-    except:
+    except Exception as e:
         print("拉取DDNet部分失败!")
+        print(repr(e))
 
 def BuildWeb():
     CreateDirIfNotExists("web-build")
