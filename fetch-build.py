@@ -88,7 +88,7 @@ def BuildWeb():
         item = {"title": f"{i.title}", "source": f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{i.tag_name}/DDNet.exe"}
         json_dump[1]["items"].append(item)
 
-    for i in FindReleases("V", github.get_repo("infclass/infclass-client")):
+    for i in FindReleases("v", github.get_repo("infclass/infclass-client")):
         item = {"title": f"{i.title}", "source": f"https://github.com/infclass/infclass-client/releases/download/{i.tag_name}/Infclass-{i.tag_name[1:]}-win64.zip"}
         json_dump[2]["items"].append(item)
 
