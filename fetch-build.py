@@ -89,8 +89,12 @@ def BuildWeb():
         json_dump[1]["items"].append(item)
 
     for i in FindReleases("v", github.get_repo("infclass/infclass-client")):
-        item = {"title": f"{i.title}", "source": f"https://github.com/infclass/infclass-client/releases/download/{i.tag_name}/Infclass-{i.tag_name[1:]}-win64.zip"}
-        json_dump[2]["items"].append(item)
+        # find file
+        for file in i.get_assets():
+            if(file.name.find("win64")):
+                item = {"title": f"{i.title}", "source": f"https://github.com/infclass/infclass-client/releases/download/{i.tag_name}/{file.name}"}
+                json_dump[2]["items"].append(item)
+                break
 
     buffer = buffer.format(json.dumps(json_dump, ensure_ascii=False))
 
