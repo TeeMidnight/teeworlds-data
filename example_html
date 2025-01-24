@@ -216,7 +216,7 @@
   </main>
   <footer>
     <div class="container">
-      <span>© 2025 Mid·Night</span>
+      <span>© 2025 Mid·Night <a href="https://github.com/TeeMidNight/teeworlds-data">Open Source</a></span>
     </div>
   </footer>
   <script>
