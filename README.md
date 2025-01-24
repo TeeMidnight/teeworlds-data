@@ -5,3 +5,4 @@ Teeworlds-Data
 # 提供列表
 DDNet(Android)
 TaterClient(Windows)
+InfClass-Client(Windows)

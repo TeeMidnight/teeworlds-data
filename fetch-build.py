@@ -77,14 +77,20 @@ def BuildWeb():
     buffer = file.read()
 
     # generate json
-    json_dump = [{"name" : "DDNet", "items": []}, {"name": "TaterClient", "items": []}]
+    json_dump = [{"name" : "DDraceNetwork (Android)", "items": []}, 
+                {"name": "TaterClient (Windows, Gores)", "items": []},
+                {"name": "InfClass-Client (Windows, 感染模式)", "items": []}]
     for i in FindReleases("ddnet", repo):
-        item = {"title": f"{i.title} (Android)", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{i.title}.apk"}
+        item = {"title": f"{i.title}", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{i.title}.apk"}
         json_dump[0]["items"].append(item)
 
     for i in FindReleases("V", github.get_repo("sjrc6/TaterClient-ddnet")):
-        item = {"title": f"TaterClient{i.title} (Windows)", "source": f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{i.tag_name}/DDNet.exe"}
+        item = {"title": f"{i.title}", "source": f"https://github.com/sjrc6/TaterClient-ddnet/releases/download/{i.tag_name}/DDNet.exe"}
         json_dump[1]["items"].append(item)
+
+    for i in FindReleases("V", github.get_repo("infclass/infclass-client")):
+        item = {"title": f"{i.title}", "source": f"https://github.com/infclass/infclass-client/releases/download/{i.tag_name}/Infclass-{i.tag_name[1:]}-win64.zip"}
+        json_dump[2]["items"].append(item)
 
     buffer = buffer.format(json.dumps(json_dump, ensure_ascii=False))
 
