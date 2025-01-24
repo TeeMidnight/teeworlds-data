@@ -13,7 +13,7 @@ branch = repo.get_branch("main")
 def FindRelease(tag_name) -> GitRelease.GitRelease | None:
     releases = repo.get_releases()
 
-    matched_releases = [release for release in releases if release.tag_name == tag_name]
+    matched_releases = [release for release in releases if release.tag_name.find(tag_name) != -1]
 
     if matched_releases:
         return matched_releases[0]
