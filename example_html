@@ -222,7 +222,7 @@
   <script>
     const mirrors = [
      {{ label: "GitHub 源链 (推荐)", prefix: "", name: "GitHub"}},
-     {{ label: "GitHub 镜像站 1", prefix: "https://github.moeyy.xyz/", name: "Mirror1"}},
+     {{ label: "GitHub 镜像站 1", prefix: "https://ghproxy.cn/", name: "Mirror1"}},
      {{ label: "GitHub 镜像站 2", prefix: "https://ghproxy.com/", name: "Mirror2"}}
     ];
     const data = {0};
