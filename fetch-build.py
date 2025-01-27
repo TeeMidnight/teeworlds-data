@@ -79,7 +79,8 @@ def BuildWeb():
     # generate json
     json_dump = [{"name" : "DDraceNetwork (Android)", "items": []}, 
                 {"name": "TaterClient (Windows, Gores)", "items": []},
-                {"name": "InfClass-Client (Windows, 感染模式)", "items": []}]
+                {"name": "InfClass-Client (Windows, 感染模式)", "items": []},
+                {"name": "Teeworlds 0.7 (Windows, Linux, MacOS)", "items": []}]
     for i in FindReleases("ddnet", repo):
         item = {"title": f"{i.title}", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{i.title}.apk"}
         json_dump[0]["items"].append(item)
@@ -95,6 +96,12 @@ def BuildWeb():
                 item = {"title": f"{i.title}", "source": f"https://github.com/infclass/infclass-client/releases/download/{i.tag_name}/{file.name}"}
                 json_dump[2]["items"].append(item)
                 break
+
+    for i in FindReleases("teeworlds-latest"):
+        for file in i.get_assets():
+            item = {"title": f"{file.name}", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{file.name}"}
+            json_dump[2]["items"].append(item)
+        break
 
     buffer = buffer.format(json.dumps(json_dump, ensure_ascii=False))
 
