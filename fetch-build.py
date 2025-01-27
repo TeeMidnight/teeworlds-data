@@ -100,7 +100,7 @@ def BuildWeb():
     for i in FindReleases("teeworlds-latest"):
         for file in i.get_assets():
             item = {"title": f"{file.name}", "source": f"https://github.com/TeeMidnight/teeworlds-data/releases/download/{i.tag_name}/{file.name}"}
-            json_dump[2]["items"].append(item)
+            json_dump[3]["items"].append(item)
         break
 
     buffer = buffer.format(json.dumps(json_dump, ensure_ascii=False))
